@@ -64,7 +64,7 @@ Things you may want to cover:
 - belongs_to_active_hash :postage_payer
 - belongs_to_active_hash :shipping_time
 - belongs_to :user
-- belongs_to :purchase
+- has_one :purchase
 - has_one_attached :image
 
 ## purchases テーブル
@@ -77,7 +77,7 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
-- has_one    :item
+- belongs_to :item
 - has_one    :address
 
 ## addresses テーブル

@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :postage_payer
   belongs_to_active_hash :shipping_time
   belongs_to :user
-  belongs_to :purchase
+  has_one :purchase
   has_one_attached :image
 
 
