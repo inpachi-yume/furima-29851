@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :postage_payer
   belongs_to_active_hash :shipping_time
   belongs_to :user
+  has_one_attached :image
 
   validates :user, presence: true
   validates :name, presence: true, length: {maximum: 40 }
