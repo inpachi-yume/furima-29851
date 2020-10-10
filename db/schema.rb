@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_10_10_093557) do
     t.string "post_code", null: false
     t.integer "prefecture_id", null: false
     t.string "city", null: false
+    t.string "house_number", null: false
     t.string "building_name"
     t.string "phone_number", null: false
     t.bigint "purchase_id", null: false
@@ -49,7 +50,6 @@ ActiveRecord::Schema.define(version: 2020_10_10_093557) do
     t.bigint "user_id", null: false
     t.string "name", null: false
     t.text "description", null: false
-    t.integer "image", null: false
     t.integer "category_id", null: false
     t.integer "condition_id", null: false
     t.integer "postage_payer_id", null: false
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2020_10_10_093557) do
     t.string "first_name", null: false
     t.string "last_name_kana", null: false
     t.string "first_name_kana", null: false
-    t.datetime "birth_date", null: false
+    t.date "birth_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
