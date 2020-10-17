@@ -16,5 +16,5 @@ class Item < ApplicationRecord
   validates :image, presence: true
   validates :category_id, :condition_id, :postage_payer_id, :shipping_time_id, numericality: { other_than: 1 }, presence: true
   validates :prefecture_id,  numericality: { other_than: 0 }, presence: true
-  validates :price, presence: true, format: { with: /^[0-9]+$/ }
+  validates :price, presence: true, format: { with: /\A[0-9]+\z/ }
 end
