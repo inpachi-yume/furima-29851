@@ -12,7 +12,7 @@ class Item < ApplicationRecord
 
   validates :user, presence: true
   validates :name, presence: true, length: {maximum: 40 }
-  validates :description, presence: true length: {maximum: 1000 }
+  validates :description, presence: true, length: {maximum: 1000 }
   validates :image, presence: true
   validates :category_id, :condition_id, :postage_payer_id, :shipping_time_id, numericality: { other_than: 1 }, presence: true
   validates :prefecture_id,  numericality: { other_than: 0 }, presence: true
