@@ -4,7 +4,7 @@ RSpec.describe Item, type: :model do
   before do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.build(:item, user_id: @user.id)
-    @item.image = fixture_file_upload('public/images/test_image.png','image/png')
+    @item.image = fixture_file_upload('public/images/test_image.png', 'image/png')
   end
 
   describe '商品出品' do
@@ -67,36 +67,36 @@ RSpec.describe Item, type: :model do
       end
       it '値段が300円以上でないと登録出来ない' do
         @item.price = 299
-        expect(@item.errors.full_messages).to include()
+        expect(@item.errors.full_messages).to include
       end
       it '値段が9999999円以下でないと登録出来ない' do
-        @item.price = 1000000
-        expect(@item.errors.full_messages).to include()
+        @item.price = 1_000_000
+        expect(@item.errors.full_messages).to include
       end
       it 'カテゴリーがーー状態だと登録出来ない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
       it '商品の状態がーーだと登録出来ない' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+        expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
       it '配送料の負担者がーーだと登録出来ない' do
         @item.postage_payer_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Postage payer must be other than 1")
+        expect(@item.errors.full_messages).to include('Postage payer must be other than 1')
       end
       it '配送時間がーーだと登録出来ない' do
         @item.shipping_time_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping time must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipping time must be other than 1')
       end
       it '発送地域がーーだと登録出来ない' do
         @item.prefecture_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
+        expect(@item.errors.full_messages).to include('Prefecture must be other than 0')
       end
     end
   end
