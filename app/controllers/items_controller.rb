@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, except: [:index, :show]
   def index
-    @items = Item.all.order("created_at DESC")
+    @items = Item.all.order('created_at DESC')
   end
 
   def new
@@ -27,9 +27,7 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    if @item.destroy
-      redirect_to root_path(@item)
-    end
+    redirect_to root_path(@item) if @item.destroy
   end
 
   def update
@@ -42,16 +40,14 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless user_signed_in? && current_user.id == @item.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless user_signed_in? && current_user.id == @item.user_id
   end
 
   private
+
   def set_item
     @item = Item.find(params[:id])
   end
-
 
   def item_params
     params.require(:item).permit(
