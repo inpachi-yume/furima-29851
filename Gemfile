@@ -71,3 +71,5 @@ gem 'active_hash'
 gem 'mini_magick'
 
 gem 'devise'
+
+gem 'payjp'
