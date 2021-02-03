@@ -1,5 +1,7 @@
 class PurchasesController < ApplicationController
   before_action :set_item, only: [:index, :create]
+  before_action :move_to_index, only: [:index]
+  before_action :move_to_login, only: [:index]
   def index
     @purchase = UserPurchase.new
   end
@@ -17,6 +19,18 @@ class PurchasesController < ApplicationController
       redirect_to root_path(@item)
     else
       render :index
+    end
+  end
+
+  def move_to_index
+    if user_signed_in? && current_user.id == @item.user_id 
+      redirect_to root_path(@item)
+    end
+  end
+
+  def move_to_login
+    unless user_signed_in?
+      redirect_to user_session_path
     end
   end
 
