@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :move_to_index, only: [:index]
-  before_action :move_to_login, only: [:index]
+  before_action :authenticate_user!, only: [:index]
   def index
     @purchase = UserPurchase.new
   end
@@ -9,11 +9,11 @@ class PurchasesController < ApplicationController
   def create
     @purchase = UserPurchase.new(purchase_params)
     if @purchase.valid?
-      Payjp.api_key = "sk_test_06eac8e25d88a5d3d6b0212d"  #
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
-        amount: @item[:price],  # 商品の値段
-        card: purchase_params[:token],    # カードトークン
-        currency: 'jpy'                 # 通貨の種類（日本円）
+        amount: @item.price,  
+        card: purchase_params[:token],    
+        currency: 'jpy'                 
       )
       @purchase.save
       redirect_to root_path(@item)
@@ -22,17 +22,6 @@ class PurchasesController < ApplicationController
     end
   end
 
-  def move_to_index
-    if user_signed_in? && current_user.id == @item.user_id or @item.purchase.present?
-      redirect_to root_path(@item)
-    end
-  end
-
-  def move_to_login
-    unless user_signed_in?
-      redirect_to user_session_path
-    end
-  end
 
   private
  
@@ -50,6 +39,13 @@ class PurchasesController < ApplicationController
       :building_name,
       :phone_number
     ).merge(user_id: current_user.id, token: params[:token])
+  end
+
+
+  def move_to_index
+    if user_signed_in? && current_user.id == @item.user_id or @item.purchase.present?
+      redirect_to root_path(@item)
+    end
   end
 
 end
