@@ -1,4 +1,4 @@
-FactoryBot.define do
+    FactoryBot.define do
   factory :item do
     name                { 'バイク' }
     description         { 'よく走ります！' }
