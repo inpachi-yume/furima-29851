@@ -15,6 +15,11 @@ RSpec.describe UserPurchase, type: :model do
       it '正しい情報が必須項目に記載されていれば登録できる' do
         expect(@purchase).to be_valid
       end
+
+      it '建物名がからでも登録できる' do
+        @purchase.building_name = ''
+        expect(@purchase).to be_valid
+      end
     end
     
     context '商品購入がうまくいかないとき' do
@@ -74,9 +79,14 @@ RSpec.describe UserPurchase, type: :model do
 
       it '電話番号が12桁以上であれば登録できない' do
         @purchase.phone_number = '000000000000'
-        @purchase.phone_number = '000000000000'
         @purchase.valid?
         expect(@purchase.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
+      end
+
+      it '電話番号が英数混合であれば登録できない' do
+        @purchase.phone_number = 'abcde000000'
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include('Phone number is invalid')
       end
 
       it '郵便番号にハイフンが無いと登録出来ない' do
