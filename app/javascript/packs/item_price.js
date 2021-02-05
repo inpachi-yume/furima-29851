@@ -1,4 +1,4 @@
-window.addEventListener("turbolinks:load", function(){
+window.addEventListener("load", function(){
   const adprice = document.getElementById("item-price")
   const fee = document.getElementById('add-tax-price')
   const margin = document.getElementById('profit')
